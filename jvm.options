@@ -17,9 +17,9 @@
 ################################################################
 
 ## GC configuration
-11-13:-XX:+UseConcMarkSweepGC
-11-13:-XX:CMSInitiatingOccupancyFraction=75
-11-13:-XX:+UseCMSInitiatingOccupancyOnly
+-XX:+UseConcMarkSweepGC
+-XX:CMSInitiatingOccupancyFraction=75
+-XX:+UseCMSInitiatingOccupancyOnly
 
 ## Locale
 # Set the locale language
@@ -61,14 +61,15 @@
 #-XX:HeapDumpPath=${LOGSTASH_HOME}/heapdump.hprof
 
 ## GC logging
-#-Xlog:gc*,gc+age=trace,safepoint:file=@loggc@:utctime,pid,tags:filecount=32,filesize=64m
+#-XX:+PrintGCDetails
+#-XX:+PrintGCTimeStamps
+#-XX:+PrintGCDateStamps
+#-XX:+PrintClassHistogram
+#-XX:+PrintTenuringDistribution
+#-XX:+PrintGCApplicationStoppedTime
 
 # log GC status to a file with time stamps
 # ensure the directory exists
 #-Xloggc:${LS_GC_LOG_FILE}
 
 # Entropy source for randomness
--Djava.security.egd=file:/dev/urandom
-
-# Copy the logging context from parent threads to children
--Dlog4j2.isThreadContextMapInheritable=true
